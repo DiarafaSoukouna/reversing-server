@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const roleRoutes = require("./routes/roleRoutes");
 const planRoutes = require("./routes/planRoutes");
@@ -26,6 +27,7 @@ const tache_groupeRoutes = require("./routes/tache_groupeRoutes");
 const tache_utilisateurRoutes = require("./routes/tache_utilisateurRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRoutes);
@@ -54,7 +56,7 @@ app.use("/projet_utilisateur", projet_utilisateurRoutes);
 app.use("/tache_groupe", tache_groupeRoutes);
 app.use("/tache_utilisateur", tache_utilisateurRoutes);
 app.use("/notification", notificationRoutes);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Serveur en cours d'exécution sur le port ${PORT}`);
 });

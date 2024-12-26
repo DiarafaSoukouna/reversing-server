@@ -5,9 +5,9 @@ const axeController = {
   // Création d'un axe d'action
   createAxe: async (req, res) => {
     try {
-      const { plan_id, name, description, statut, objectif } = req.body;
+      const { name, description, statut, objectif } = req.body;
 
-      if (!name || !objectif || !statut || !plan_id) {
+      if (!name || !objectif || !statut) {
         return res
           .status(400)
           .json({ message: "Renseignez tous les champs requis." });
@@ -15,7 +15,6 @@ const axeController = {
 
       const newAxe = await prisma.axes.create({
         data: {
-          plan_id,
           name,
           description,
           statut,
@@ -90,7 +89,7 @@ const axeController = {
   // Modification d'un axe d'action
   updateAxe: async (req, res) => {
     try {
-      const { id, plan_id, name, description, statut, objectif } = req.body;
+      const { id, name, description, statut, objectif } = req.body;
 
       // Vérifie si le axe existe
       const axeExist = await prisma.axes.findUnique({
@@ -103,7 +102,6 @@ const axeController = {
       const updatedAxe = await prisma.axes.update({
         where: { id: parseInt(id) },
         data: {
-          plan_id,
           name,
           description,
           statut,

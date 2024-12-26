@@ -27,17 +27,13 @@ model actualites {
 
 model axes {
   id           Int          @id @default(autoincrement())
-  plan_id      Int
   name         String       @db.VarChar(100)
   description  String?      @db.Text
   statut       String?      @db.VarChar(100)
   objectif     String?      @db.Text
   created_date DateTime     @default(now()) @db.Timestamp(0)
   last_updated DateTime     @default(now()) @db.Timestamp(0)
-  plans_action plans_action @relation(fields: [plan_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "axes_ibfk_1")
   projets      projets[]
-
-  @@index([plan_id], map: "plan_id")
 }
 
 model category_user {
@@ -168,7 +164,7 @@ model plans_action {
   end_date     DateTime? @db.Date
   created_date DateTime  @default(now()) @db.Timestamp(0)
   last_updated DateTime  @default(now()) @db.Timestamp(0)
-  axes         axes[]
+
 }
 
 model priority {
